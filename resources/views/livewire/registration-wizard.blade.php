@@ -30,15 +30,17 @@
           <label for="">Password</label>
           <input type="password"
             class="form-control" wire:model="password" name="password" id="" aria-describedby="helpId" placeholder="">
-          <small id="helpId" class="form-text text-muted">Please your password</small>
+          @error('password')
+            <small id="helpId" class="form-text text-muted"><span style="color:red">{{$message}}</span></small>
+          @enderror
         </div>
             <br class="">
             <button type="button" class="btn btn-secondary" wire:click="actuallyDoSubmit()">Submit Me</button>
     </div>
             <br class="">
     <div class="d-none d-sm-block">
-        <button class="btn btn-primary " wire:click="progressWizard(1,false)">Go to step 1</button>
-        <button class="btn btn-primary" wire:click="progressWizard(2,false)">Go to step 2</button>
+        <button style="{{$currentStep===2 ? 'display:block;':'display:none;'}}" class="btn btn-primary " wire:click="progressWizard(1,false)">Go to step 1</button>
+        <button style="{{$currentStep===1 ? 'display:block;':'display:none;'}}" class="btn btn-primary" wire:click="progressWizard(2,false)">Go to step 2</button>
     </div>
 
 

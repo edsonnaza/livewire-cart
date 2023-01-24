@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Hash;
+
 
 class RegistrationWizard extends Component
 {
-    public string $email;
-    public string $name;
-    public string $password;
+    public string $email='';
+    public string $name='';
+    public string $password='';
     public int $currentStep=1;
     public function render()
     {
@@ -41,7 +44,18 @@ class RegistrationWizard extends Component
      }
 
     public function actuallyDoSubmit(){
-
+        $allRules= self::myGetRules();
+        $flatRules= collect($allRules)->mapWithKeys(
+                function($item,$key){
+                    return $item;
+                });
+        $this->validate($flatRules->toArray());
+        $u=new User();
+        $u->name=$this->name;
+        $u->email=$this->email;
+        $u->password=Hash::make($this->password);
+        $u->save();
+        return redirect('/');
 
     }
 }
