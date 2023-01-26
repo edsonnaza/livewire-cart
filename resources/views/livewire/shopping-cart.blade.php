@@ -7,5 +7,7 @@
         </svg>
 
         <span class="badge bg-success">{{ $count }}</span>
+
     </div>
+
 </div>

@@ -21,7 +21,15 @@
         </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         @livewireStyles
+
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -61,6 +69,8 @@
                                   <!--  <livewire:registration-wizard/>-->
                                         <livewire:shopping-cart/>
                                 </div>
+                                    <br class="">
+                                    
                             </div>
                         </div>
 
@@ -95,6 +105,35 @@
                 </div>
             </div>
         </div>
+
+
         @livewireScripts
+@livewireScripts
+
+<script>
+
+window.addEventListener('swal:modal', event => {
+    swal({
+      title: event.detail.message,
+      text: event.detail.text,
+      icon: event.detail.type,
+    });
+});
+
+window.addEventListener('swal:confirm', event => {
+    swal({
+      title: event.detail.message,
+      text: event.detail.text,
+      icon: event.detail.type,
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        window.livewire.emit('remove');
+      }
+    });
+});
+ </script>
     </body>
 </html>
